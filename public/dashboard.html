@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>College Resource Sharing Platform</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    overflow: hidden;
+}
+
+/* TOP BAR */
+.top-bar{
+    background:rgb(242, 255, 0);
+    color:red;
+    padding:4px;
+    font-size:40px;
+    text-align:center;
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+.top-bar span{
+    display:inline-block;
+    padding-left:100%;
+    animation:moveText 15s linear infinite;
+}
+
+@keyframes moveText{
+    from{transform:translateX(0);}
+    to{transform:translateX(-100%);}
+}
+
+/* LAYOUT */
+.container{
+    display:flex;
+    height:calc(100vh - 60px);
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:260px;
+    background:#1f2a44;
+    padding:15px;
+    color:rgba(217, 217, 236, 0.945);
+    height: 100%;
+}
+
+.sidebar h2{
+    text-align:center;
+}
+
+.subject-btn{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    background:#2dd4bf;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+/* CONTENT */
+.content{
+    flex:1;
+    padding:30px;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    transition:0.5s;
+    height:100%;
+    overflow-y: auto;
+}
+
+.btn{
+    padding:10px 15px;
+    margin:8px;
+    background:#3b82f6;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+.heading-color{
+    color:rgb(10, 16, 206);
+}
+.search-box{
+    width:80%;
+    padding:8px;
+    border-radius:18px;
+    border:none;
+    margin-bottom:15px;
+}
+.glass-box{
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,0.3);
+
+    padding:25px;
+    width:450px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+    <span>Welcome to Content page</span>
+</div>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>subjects</h2>
+        <input type="text" id="searchBar" placeholder="Search subject..."
+        onkeyup="searchSubjects()" class="search-box">
+        <button class="subject-btn" onclick="management()">Management Science</button>
+        <button class="subject-btn" onclick="datastructures()">Data Structures</button>
+        <button class="subject-btn" onclick="c_language()">C Language</button>
+        <button class="subject-btn" onclick="python()">python</button>
+        <button class="subject-btn" onclick="daa()">Design Analysis and Algorithm</button>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content" id="content">
+        <h2>Select a Subject</h2>
+    </div>
+
+</div>
+
+<script>
+function openFile(path){
+    window.open(path, "_blank");
+}
+function searchSubjects(){
+    let input = document.getElementById("searchBar").value.toLowerCase();
+    let buttons = document.getElementsByClassName("subject-btn");
+
+    for(let i=0;i<buttons.length;i++){
+        let text = buttons[i].innerText.toLowerCase();
+
+        if(text.includes(input)){
+            buttons[i].style.display="block";
+        }
+        else{
+            buttons[i].style.display="none";
+        }
+    }
+}
+
+/* MANAGEMENT SCIENCE */
+function management(){
+    let content = document.getElementById("content");
+    content.style.backgroundImage = "url('images/clg.jpg')";
+    content.innerHTML = 
+        `<div class="glass-box">
+        <h1 class="heading-color">Management Science</h1>
+
+        <h3>PPTs</h3>
+        <button class="btn" onclick="openFile('ppts/msunit1.pdf')">Unit 1 PPT</button>
+        <button class="btn" onclick="openFile('ppts/msunit2.pdf')">Unit 2 PPT</button>
+        <button class="btn" onclick="openFile('ppts/msunit3.pptx')">Unit 3 PPT</button>
+
+        <h3>Notes</h3>
+        <button class="btn" onclick="openFile('notes/ms unit1 and unit2.docx')">
+            Word Document
+        </button>
+    `;
+}
+
+/* DATA STRUCTURES */
+function datastructures(){
+    let content = document.getElementById("content");
+    content.style.backgroundImage = "url('images/clg.jpg')";
+    content.innerHTML = `
+        <div class="glass-box">
+        <h1 class="heading-color">Data Structures</h1>
+        <h2 class="heading-color">Topics</h2>
+        <input type="text" id="topicSearch" placeholder="Search topic..." 
+        onkeyup="searchTopics()" class="search-box">
+        <button class="btn topic-btn" onclick="openFile('ppts/datastructures/insertion_sort.pptx')">Insertion Sort</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/datastructures/quick_sort.pptx')">Quick Sort</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/datastructures/selection_sort.pptx')">Selection Sort</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/datastructures/bubble_merge_sort.pptx')">Bubble & Merge Sort</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/datastructures/linked_list.pptx')">Linked List</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/datastructures/stacks.pptx')">Stacks</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/datastructures/queues.pptx')">Queues</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/datastructures/binary_tree.pptx')">Binary Tree</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/datastructures/bst.pptx')">Binary Search Tree</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/datastructures/avl_tree.pptx')">AVL Tree</button><br>
+        <button class="btn topic-btn" onclick="openFile('notes/Graph Traversals.pdf')">Graph Traversals</button>
+    `;
+}
+
+function c_language(){
+    let content = document.getElementById("content");
+    content.style.backgroundImage = "url('images/Clg.jpg')";
+    content.innerHTML = `
+    <div class="glass-box">
+        <h1 class="heading-color">C Language</h1>
+        <h2 class="heading-color">Topics</h2>
+        <input type="text" id="topicSearch" placeholder="Search topic..." 
+         onkeyup="searchTopics()" class="search-box">
+        <button class="btn topic-btn" onclick="openFile('ppts/c/C-Language-Introduction.pdf')">introduction</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/c/DataIO.pdf')">DataIO</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/c/Control-Statements-Complete.pdf')">control statements</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/c/Functions-Complete.pdf')">functions</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/c/Structures-Complete.pdf')">Structures</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/c/1-D-Array-Complete.pdf')">1D array</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/c/2-D-Array-Complete.pdf')">2D array</button><br>
+    `;
+}
+
+function python(){
+    let content = document.getElementById("content");
+    content.style.backgroundImage = "url('images/clg.jpg')";
+    content.innerHTML = `
+    <div class="glass-box">
+
+    
+        <h1 class="heading-color">python</h1>
+        <h2 class="heading-color">Topics</h2>
+        <input type="text" id="topicSearch" placeholder="Search topic..." 
+         onkeyup="searchTopics()" class="search-box">
+        <button class="btn topic-btn" onclick="openFile('ppts/python/python-Introduction.pdf')">Introduction</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/Decision-Making-Complete.pdf')">Decision making</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/Loops-Complete.pdf')">Loops</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/NUmbers-Complete.pdf')">NUmbers</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/Strings-Complete.pdf')">Strings</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/List-Complete.pdf')">list</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/Tuples-Complete.pdf')">Tuples</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/Dictionaries-Complete.pdf')">Dictionaries</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/Sets-Complete.pdf')">Sets</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/List-Comprehensions-Complete.pdf')">List Comprehensions</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/Functions-Complete.pdf')">Functions</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/Modules-Complete.pdf')">Modules</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/Packages-Complete.pdf')">Packages</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/ExceptionHandling-Complete.pdf')">Exception Handling</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/Files-Complete.pdf')">Files</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/python/OOPS-Complete.pdf')">OOPS</button><br>
+    `;
+}
+
+function daa(){
+    let content = document.getElementById("content");
+    content.style.backgroundImage = "url('images/clg.jpg')";
+    content.innerHTML = `
+    <div class="glass-box">
+        <h1 class="heading-color">Design and analysis and algorithm</h1>
+        <h2 class="heading-color">Topics</h2>
+        <input type="text" id="topicSearch" placeholder="Search topic..." 
+         onkeyup="searchTopics()" class="search-box">
+        <button class="btn topic-btn" onclick="openFile('ppts/daa/DAA unit-1 Introduction.pptx')">introduction</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/daa/DAA Unit-II Divide & Conquer.pptx')">Divide and Conquer</button><br>
+        <button class="btn topic-btn" onclick="openFile('ppts/daa/DAA Unit-II Greedy Method.ppt')">Greedy method</button><br>
+    `;
+}
+function searchTopics(){
+
+let input = document.getElementById("topicSearch").value.toLowerCase();
+let topics = document.getElementsByClassName("topic-btn");
+
+for(let i=0;i<topics.length;i++){
+
+let text = topics[i].innerText.toLowerCase();
+
+if(text.includes(input)){
+topics[i].style.display = "inline-block";
+}
+else{
+topics[i].style.display = "none";
+}
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

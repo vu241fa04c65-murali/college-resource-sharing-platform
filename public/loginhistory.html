@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login History</title>
+</head>
+<body>
+
+<h2>Login History</h2>
+<ul id="historyList"></ul>
+
+<script>
+const history = JSON.parse(localStorage.getItem("loginHistory")) || [];
+
+const list = document.getElementById("historyList");
+
+history.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item.email + " - " + item.time;
+    list.appendChild(li);
+});
+</script>
+
+</body>
+</html>
