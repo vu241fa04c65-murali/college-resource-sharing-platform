@@ -4,15 +4,17 @@ const cors = require("cors");
 
 const app = express();
 
+// ✅ Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-// ✅ FINAL FIXED CONNECTION (NO OPTIONS)
+// ✅ MongoDB Connection
 mongoose.connect("mongodb+srv://241fa04c65:nari9347@collegedb.skyoyss.mongodb.net/collegeDB")
 .then(() => console.log("✅ MongoDB Connected"))
 .catch(err => console.log("❌ DB Error:", err));
 
+// ✅ Schema
 const UserSchema = new mongoose.Schema({
     name: String,
     email: String,
@@ -21,45 +23,61 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
+// ================= SIGNUP =================
 app.post("/signup", async (req, res) => {
     try {
+        console.log("Incoming Data:", req.body); // 🔥 ADDED (debug)
+
         const { name, email, password } = req.body;
+
+        // 🔥 ADDED validation
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
 
         const existingUser = await User.findOne({ email });
 
         if (existingUser) {
-            return res.json({ message: "User already exists" });
+            return res.status(400).json({ message: "User already exists" });
         }
 
         const newUser = new User({ name, email, password });
         await newUser.save();
 
-        res.json({ message: "Signup successful" });
+        res.status(201).json({ message: "Signup successful" });
 
     } catch (err) {
-        console.log(err);
-        res.json({ message: "Server error" });
+        console.log("Signup Error:", err); // 🔥 ADDED detailed error
+        res.status(500).json({ message: "Server error" });
     }
 });
 
+// ================= LOGIN =================
 app.post("/login", async (req, res) => {
     try {
+        console.log("Login Data:", req.body); // 🔥 ADDED
+
         const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
 
         const user = await User.findOne({ email, password });
 
         if (user) {
-            res.json({ message: "Login successful" });
+            res.status(200).json({ message: "Login successful" });
         } else {
-            res.json({ message: "Invalid credentials" });
+            res.status(401).json({ message: "Invalid credentials" });
         }
 
     } catch (err) {
-        console.log(err);
-        res.json({ message: "Server error" });
+        console.log("Login Error:", err); // 🔥 ADDED
+        res.status(500).json({ message: "Server error" });
     }
 });
 
+// ================= SERVER =================
 const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
