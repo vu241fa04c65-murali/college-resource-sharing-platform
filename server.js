@@ -10,9 +10,10 @@ app.use(express.json());
 app.use(express.static("public")); // serve your HTML files
 
 // MongoDB Connection
-mongoose.connect("mongodb://127.0.0.1:27017/collegeDB")
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.log("❌ DB Error:", err));
+mongoose.connect("mongodb+srv://241fa04c65:nari9347@collegedb.skyoyss.mongodb.net/collegeDB")
+.then(() => console.log("MongoDB Atlas Connected"))
+.catch(err => console.log(err));
+
 
 // Schema
 const UserSchema = new mongoose.Schema({
@@ -69,6 +70,8 @@ app.post("/login", async (req, res) => {
 
 
 // ================= SERVER =================
-app.listen(5000, () => {
-    console.log("🚀 Server running at http://localhost:5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
 });
