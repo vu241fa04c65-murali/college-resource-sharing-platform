@@ -215,37 +215,40 @@ if(!localStorage.getItem("users")){
 }
 
 // login function
-function login(){
+async function login(){
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const users = JSON.parse(localStorage.getItem("users"));
+    if(!email || !password){
+        alert("Please enter email and password");
+        return;
+    }
 
-    const validUser = users.find(user => 
-        user.email === email && user.password === password
-    );
-
-    if(validUser){
-
-        // Store current logged in user
-        localStorage.setItem("currentUser", email);
-
-        // Store login history
-        let loginHistory = JSON.parse(localStorage.getItem("loginHistory")) || [];
-        loginHistory.push({
-            email: email,
-            time: new Date().toLocaleString()
+    try {
+        const res = await fetch("https://college-resource-sharing-platformc65.onrender.com/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
         });
 
-        localStorage.setItem("loginHistory", JSON.stringify(loginHistory));
+        const data = await res.json();
 
-        window.location.href = "dashboard.html";
+        alert(data.message);
 
-    } else {
-        alert("❌ Invalid Email or Password");
+        if(data.message === "Login successful"){
+            window.location.href = "dashboard.html";
+        }
+
+    } catch (error) {
+        console.log(error);
+        alert("❌ Server error");
     }
 }
-
 
 // SHOW SIGNUP FORM
 function showSignup(){
