@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static("public")); // serve your HTML files
 
 // MongoDB Connection
-mongoose.connect("mongodb+srv://241fa04c65:nari9347@collegedb.skyoyss.mongodb.net/collegeDB",useNewUrlParser: true,
+mongoose.connect("mongodb+srv://241fa04c65:nari9347@collegedb.skyoyss.mongodb.net/collegeDB",{useNewUrlParser: true,
     useUnifiedTopology: true
 })
 .then(() => console.log("MongoDB Atlas Connected"))
