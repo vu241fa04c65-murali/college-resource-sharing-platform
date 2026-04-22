@@ -126,6 +126,9 @@ body{
         <button class="subject-btn" onclick="c_language()">C Language</button>
         <button class="subject-btn" onclick="python()">python</button>
         <button class="subject-btn" onclick="daa()">Design Analysis and Algorithm</button>
+        <button class="subject-btn" onclick="Os()">Operating Systems</button>
+        
+        
     </div>
 
     <!-- CONTENT -->
@@ -260,6 +263,30 @@ function daa(){
         <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1bgezAqmZbS44PFPCrSO2T0DnTGVRDpcL/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">introduction</button><br>
         <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1HJlzOytxKZOJ0mBPNT7z8yNCSFfyES6b/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">Divide and Conquer</button><br>
         <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1PpMcz8lqpu_ivFLRZJ0Vi05-xvNMmsXk/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">Greedy method</button><br>
+        <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1bZKFM-eBKeEOtLNQ0urJGwzxoiVnGca1/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">disjoint sets updated</button><br>
+        <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1SXHL6j8Hc4kA8y-ewBTsV-y9wGRjLpWy/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">Prims algorithm</button><br>
+        <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1b-fLFLgJV0wCbMyTKVD5T93v7Z_PScbd/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">Dynamic Programming</button><br>
+        <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1U6xElG-f8DUGexJ-dtY3cOYyQGhMo0Sm/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">Back tracking</button><br>
+        
+        
+        
+    `;
+}
+function Os(){
+    let content = document.getElementById("content");
+    content.style.backgroundImage = "url('images/Clg.jpg')";
+    content.innerHTML = `
+    <div class="glass-box">
+        <h1 class="heading-color">Operating Systems</h1>
+        <h2 class="heading-color">Topics</h2>
+        <input type="text" id="topicSearch" placeholder="Search topic..." 
+         onkeyup="searchTopics()" class="search-box">
+        <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1TVpuNSF37EFcQ8TWTfapxX8gzQMPEesX/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">Linux introduction</button><br>
+        <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1mSErWSyrEVfOK6KCFy4_L5Ai3b_3gr78/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">Introduction to Operating Systems</button><br>
+        <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1KOzAMCCWIv-7AkKPmqaULYDNxe2OyQOd/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">Process Synchronization and Deadlocks</button><br>
+        <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1vz60oPMbglcpZqLphLNHQUgo49kZjzk6/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">Memory management</button><br>
+        <button class="btn topic-btn" onclick="openFile('https://docs.google.com/presentation/d/1A4id2_9tdi-ExDM2ONldpENHcQF0D2-Z/edit?usp=drive_link&ouid=104806768960904859361&rtpof=true&sd=true')">Virtual Memory management</button><br>
+        
     `;
 }
 function searchTopics(){
